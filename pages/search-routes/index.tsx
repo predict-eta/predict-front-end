@@ -1,19 +1,20 @@
-import React, { ReactElement, useMemo } from "react";
-import InputRouteView from "@/components/input-route/InputRouteView";
-import RootLayout from "@/layouts/main";
-import { Card, Container, Paper, Stack, Typography } from "@mui/material";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/router";
-import type { NextPageWithLayout } from "../_app";
+import React, { ReactElement, useMemo } from 'react'
+import InputRouteView from '@/components/input-route/InputRouteView'
+import RootLayout from '@/layouts/main'
+import { Card, Container, Paper, Stack, Typography } from '@mui/material'
+import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import type { NextPageWithLayout } from '../_app'
+import moment from 'moment'
 
 const SearchRoutesPage: NextPageWithLayout = () => {
-  const { query } = useRouter();
+  const { query } = useRouter()
   const { startCountry, startPort, endCountry, endPort, startDate } =
-    query ?? {};
+    query ?? {}
 
   const convertedDate = useMemo(() => {
-    return startDate ? new Date(String(startDate)) : null;
-  }, [startDate]);
+    return startDate ? moment(startDate, 'YYYYMMDD').toDate() : null
+  }, [startDate])
 
   return (
     <Container
@@ -36,21 +37,21 @@ const SearchRoutesPage: NextPageWithLayout = () => {
         defaultStartDate={convertedDate}
       />
     </Container>
-  );
-};
+  )
+}
 
 SearchRoutesPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <RootLayout
       sx={{
-        bgcolor: "#EFF2F7",
-        minHeight: "100vh",
+        bgcolor: '#EFF2F7',
+        minHeight: '100vh',
         height: 1,
       }}
     >
       {page}
     </RootLayout>
-  );
-};
+  )
+}
 
-export default SearchRoutesPage;
+export default SearchRoutesPage

@@ -24,6 +24,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import RouteResult from "./RouteResult";
 import { predictRoute } from "@/lib/api";
 import Snackbar from "@/utils/notistack/Snackbar";
+import moment from "moment";
 
 // eslint-disable-next-line react/display-name
 export const CustomStartDateInput = forwardRef((props, ref) => {
@@ -209,7 +210,7 @@ const InputRouteView: React.FC<InputRouteViewProps> = ({
           startPort: start?.code,
           endCountry: end?.countryId,
           endPort: end?.code,
-          startDate: date?.toLocaleDateString(),
+          startDate: moment(date).format('YYYYMMDD'),
         },
       });
     } else handlePredictRoutes({ start, end, date });
